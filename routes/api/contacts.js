@@ -1,46 +1,53 @@
-const express = require('express');
+const express = require("express");
 
-const contactsController = require('../../controllers/contactsController');
-const validation = require('../../middlewares/validation');
-const tryCatchMiddleware = require('../../middlewares/tryCatchMiddleware');
-const auth = require('../../middlewares/auth');
-const { joiContact, joiFavoriteField } = require('../../models/contact');
+const contactsController = require("../../controllers/contactsController");
+const validation = require("../../middlewares/validation");
+const tryCatchMiddleware = require("../../middlewares/tryCatchMiddleware");
+const auth = require("../../middlewares/auth");
+const { joiContact, joiFavoriteField } = require("../../models/contact");
 
 const router = express.Router();
 
-router.get('/', auth, tryCatchMiddleware(contactsController.getAllContacts));
+router.get("/", auth, tryCatchMiddleware(contactsController.getAllContacts));
 
 router.get(
-  '/:contactId',
+    '/example',
+    tryCatchMiddleware(contactsController.contactExample)
+);
+
+router.get(
+  "/:contactId",
   auth,
-  tryCatchMiddleware(contactsController.getOneContact),
+  tryCatchMiddleware(contactsController.getOneContact)
 );
 
 router.post(
-  '/',
+  "/",
   auth,
   validation(joiContact),
-  tryCatchMiddleware(contactsController.addContact),
+  tryCatchMiddleware(contactsController.addContact)
 );
 
 router.delete(
-  '/:contactId',
+  "/:contactId",
   auth,
-  tryCatchMiddleware(contactsController.deleteContact),
+  tryCatchMiddleware(contactsController.deleteContact)
 );
 
 router.put(
-  '/:contactId',
+  "/:contactId",
   auth,
   validation(joiContact),
-  tryCatchMiddleware(contactsController.updateContact),
+  tryCatchMiddleware(contactsController.updateContact)
 );
 
 router.patch(
-  '/:contactId/favorite',
+  "/:contactId/favorite",
   auth,
   validation(joiFavoriteField),
-  tryCatchMiddleware(contactsController.updateFavouriteField),
+  tryCatchMiddleware(contactsController.updateFavouriteField)
 );
+
+
 
 module.exports = router;

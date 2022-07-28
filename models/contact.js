@@ -1,18 +1,18 @@
-const { Schema, model } = require('mongoose');
-const Joi = require('joi');
+const { Schema, model } = require("mongoose");
+const Joi = require("joi");
 
 const contactSchema = Schema({
   name: {
     type: String,
-    required: [true, 'Set name for contact'],
+    required: [true, "Set name for contact"],
   },
   email: {
     type: String,
-    required: [true, 'Set email for contact'],
+    required: [true, "Set email for contact"],
   },
   phone: {
     type: String,
-    required: [true, 'Set phone number for contact'],
+    required: [true, "Set phone number for contact"],
   },
   favorite: {
     type: Boolean,
@@ -20,7 +20,7 @@ const contactSchema = Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
   },
 });
 
@@ -33,7 +33,7 @@ const joiContact = Joi.object({
 
 const joiFavoriteField = Joi.object({ favorite: Joi.boolean().required() });
 
-const Contact = model('contact', contactSchema);
+const Contact = model("contact", contactSchema);
 
 module.exports = {
   Contact,

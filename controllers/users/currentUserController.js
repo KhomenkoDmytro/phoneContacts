@@ -1,4 +1,4 @@
-const { User } = require('../../models/user');
+const { User } = require("../../models/user");
 
 const getCurrent = async (req, res) => {
   const { email, subscription } = req.user;
@@ -15,7 +15,7 @@ const updateSubscription = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     { subscription },
-    { new: true },
+    { new: true }
   );
   res.json({
     email: updatedUser.email,

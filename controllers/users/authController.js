@@ -1,13 +1,13 @@
-const { User } = require('../../models/user');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const SECRET_KEY = 'jsonwebtoken';
+const { User } = require("../../models/user");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = "jsonwebtoken";
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
-    const error = new Error('Email in use');
+    const error = new Error("Email in use");
     error.status = 409;
     throw error;
   }
@@ -18,7 +18,7 @@ const signup = async (req, res) => {
   res.status(201).json({
     user: {
       email,
-      subscription: 'starter',
+      subscription: "starter",
     },
   });
 };
@@ -27,13 +27,13 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    const error = new Error('Email or password is wrong');
+    const error = new Error("Email or password is wrong");
     error.status = 401;
     throw error;
   }
   const passCompare = bcrypt.compareSync(password, user.password);
   if (!passCompare) {
-    const error = new Error('Email or password is wrong');
+    const error = new Error("Email or password is wrong");
     error.status = 401;
     throw error;
   }
@@ -42,7 +42,7 @@ const login = async (req, res) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '12h' });
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "12h" });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
@@ -54,7 +54,7 @@ const logout = async (req, res) => {
   const { _id } = req.user;
   console.log(_id);
   await User.findByIdAndUpdate(_id, { token: null });
-  res.status(204).json({ message: 'successfully logged out' });
+  res.status(204).json({ message: "successfully logged out" });
 };
 
 module.exports = { signup, login, logout };
