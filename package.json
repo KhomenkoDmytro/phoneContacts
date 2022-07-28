@@ -23,9 +23,14 @@
     "author": "KhomenkoDmytro",
     "license": "ISC",
     "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "2.8.5",
         "express": "^4.18.1",
         "husky": "^3.0.8",
-        "mongoose": "^6.5.0"
+        "mongoose": "^6.5.0",
+        "uuid": "^8.3.2",
+        "joi": "^17.6.0",
+        "jsonwebtoken": "^8.5.1"
     },
     "devDependencies": {
         "eslint": "^8.19.0",
