@@ -18,8 +18,7 @@
         }
     },
     "lint-staged": {
-        "*.{js, jsx, ts, tsx}": "npm run lint:check",
-        "*.{js, json, md}": "npm run format:check"
+        "*.{js, jsx, ts, tsx, json, md}": "npm run lint:check"
     },
     "author": "KhomenkoDmytro",
     "license": "ISC",
