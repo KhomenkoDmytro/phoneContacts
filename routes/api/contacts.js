@@ -10,10 +10,7 @@ const router = express.Router();
 
 router.get("/", auth, tryCatchMiddleware(contactsController.getAllContacts));
 
-router.get(
-    '/example',
-    tryCatchMiddleware(contactsController.contactExample)
-);
+router.get("/example", tryCatchMiddleware(contactsController.contactExample));
 
 router.get(
   "/:contactId",
@@ -47,7 +44,5 @@ router.patch(
   validation(joiFavoriteField),
   tryCatchMiddleware(contactsController.updateFavouriteField)
 );
-
-
 
 module.exports = router;

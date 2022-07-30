@@ -1,8 +1,16 @@
+const { default: axios } = require("axios");
+const randomEmail = require("random-email");
+const { v4: uuidv4 } = require("uuid");
 const { Contact } = require("../models/contact");
-const { default:axios } = require('axios');
-const randomEmail = require('random-email');
-const { v4: uuidv4 } = require('uuid');
 
+async function isYourContact(ownerId, contactId) {
+  const contact = await Contact.find({ owner: ownerId, _id: contactId });
+  if (JSON.stringify(contact) === "[]") {
+    const error = new Error(`Contact with id: ${contactId} not found`);
+    error.status = 404;
+    throw error;
+  }
+}
 
 const getAllContacts = async (req, res) => {
   const { _id } = req.user;
@@ -71,21 +79,12 @@ const updateFavouriteField = async (req, res) => {
   res.json(updatedContact);
 };
 
-async function isYourContact(ownerId, contactId) {
-  const contact = await Contact.find({ owner: ownerId, _id: contactId });
-  if (JSON.stringify(contact) === "[]") {
-    const error = new Error(`Contact with id: ${contactId} not found`);
-    error.status = 404;
-    throw error;
-  }
-};
-
 async function contactExample(req, res) {
   const {
     data: { results },
-  } = await axios.get('https://randomuser.me/api/');
+  } = await axios.get("https://randomuser.me/api/");
   res.json({
-    name: results[0].name.first + ' ' + results[0].name.last,
+    name: results[0].name.first + " " + results[0].name.last,
     phone: results[0].phone,
     email: results[0].email,
     _id: uuidv4(),
@@ -95,7 +94,7 @@ async function contactExample(req, res) {
       email: randomEmail(),
     },
   });
-};
+}
 
 module.exports = {
   getAllContacts,
@@ -104,5 +103,5 @@ module.exports = {
   deleteContact,
   updateContact,
   updateFavouriteField,
-  contactExample
+  contactExample,
 };

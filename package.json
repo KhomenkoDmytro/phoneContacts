@@ -6,10 +6,10 @@
     "scripts": {
         "start": "node server.js",
         "dev": "nodemon server.js",
-        "eslint": "eslint **/*.js",
-        "eslint:fix": "eslint --fix **/*.js",
-        "lint": "prettier --check .",
-        "format": "prettier --write ."
+        "lint:check": "eslint",
+        "lint:fix": "eslint --fix **/*.js",
+        "format:check": "prettier --check",
+        "format:fix": "prettier --write ."
     },
     "husky": {
         "hooks": {
@@ -18,7 +18,8 @@
         }
     },
     "lint-staged": {
-        "*.js": "prettier --write"
+        "*.{js, jsx, ts, tsx}": "npm run lint:check",
+        "*.{js, json, md}": "npm run format:check"
     },
     "author": "KhomenkoDmytro",
     "license": "ISC",
@@ -36,7 +37,9 @@
     },
     "devDependencies": {
         "eslint": "^8.19.0",
-        "eslint-plugin-import": "^2.26.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-sonarjs": "^0.13.0",
         "lint-staged": "^9.4.1",
         "nodemon": "^2.0.19",
