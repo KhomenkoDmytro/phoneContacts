@@ -22,5 +22,7 @@ module.exports = {
     "no-console": "off",
     "prefer-template": "off",
     "sonarjs/no-duplicate-string": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off",
   },
 };
